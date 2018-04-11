@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+		<title>index</title>
+		<link rel="stylesheet" href="css/index.css">
+		<!-- <link rel="stylesheet/less" type="text/css" href="styles.less" />
+		<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.2/less.min.js" ></script> -->
+		<script type="text/javascript" src="js/vue.js"></script>
+		<script type="text/javascript" src="js/vue-router.js"></script>
+	</head>
+	<body>
+		<div id = 'app'>
+			<!-- 顶部导航栏 -->
+			<div id = 'indexTop'>
+				<div id = 'indexTop1'>
+					<div id = 'logo'><img src="img/logo.png"></div>
+					<ul id = 'topUl'>
+						<li v-for = 'topli in topLi'><a href="#">{{topli}}</a></li>
+					</ul>
+				</div>	
+			</div>
+			<!-- 内容栏 -->
+			<div id="indexMain" ref = 'indexMain' :style="traYStr">
+			<!-- page1 -->
+				<div class = "page1" v-bind:class='{page11:page1BgCtr.ispage11,page12:page1BgCtr.ispage12,page13:page1BgCtr.ispage13}'>
+					<ul>
+						<li>
+							<div class="bgdiv">
+								<div class="bg13" v-bind:class='{bg13Show:page1BgCtr.ispage11}'><img src="img/banner13.png"></div>
+								<div class="bg12" v-bind:class='{bg12Show:page1BgCtr.ispage11}'><img src="img/banner12.png" class = 'bg12Img' v-bind:class='{bg12ImgShow:page1BgCtr.ispage11}'></div>
+								<div class="bg14" v-bind:class='{bg14Show:page1BgCtr.ispage11}'><img src="img/banner14.png"></div>
+							</div>	
+						</li>
+						<li>
+							<div class="bgdiv">
+								<div class="bg22" v-bind:class='{bg22Show:page1BgCtr.ispage12}'><img src="img/banner22.png"></div>
+								<div class="bg23" v-bind:class='{bg23Show:page1BgCtr.ispage12}'><img src="img/banner23.png"></div>
+							</div>
+						</li>
+						<li>
+							<div class="bgdiv">
+								<div class="bg32" v-bind:class='{bg32Show:page1BgCtr.ispage13}'><img src="img/banner32.png"></div>
+								<div class="bg33" v-bind:class='{bg33Show:page1BgCtr.ispage13}'><img src="img/banner33.png"></div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			<!-- page2 -->
+				<div class = 'page2' ref = 'page2'>
+					<div class="page2Box" ref = 'page2Box'>
+						<ul>
+							<li v-for = 'page2li in page2'  v-on:mouseover='page2BgShow(page2li.bg)' v-on:mouseout='page2BgHide(page2li.bg)' ref = 'page2li'>
+								<div :class="page2li.bg" class="page2Bg"></div>
+								<div class="page2Div">			
+									<div :class="page2li.ico" class="page2Img"></div>
+									<h3>{{page2li.cTitle}}</h3>
+									<p class="page2P1">{{page2li.eTitle}}</p>
+									<p class="page2P2">{{page2li.txt}}</p>
+									<div class="page2A">
+										<a href="#">立即咨询</a>
+									</div>							
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			<!-- page3 -->
+				<div class = 'page3'>
+					<div class="page3Box" ref='page3Box'>
+						<!-- 上标题图栏 -->
+						<div class="page3Head">
+							<div class="page3Tit" :class = '{page3Tit1:traY[2] == traY[7],page3Tit0:traY[2] != traY[7]}'>
+								<img src="img/case_title.png">
+							</div>
+							<!-- 上右控制按钮 -->
+							<div class="page3Btn" :class = '{page3Btn1:traY[2] == traY[7],page3Btn0:traY[2] != traY[7]}'>
+								<a href="#">
+									<div :class = '{page3BtnD11:isPage3Li1,page3BtnD12:isPage3Li2}' v-on:click = 'page3BtnF'></div>
+								</a>
+								<a href="#">
+									<div :class = '{page3BtnD21:isPage3Li1,page3BtnD22:isPage3Li2}' v-on:click = 'page3BtnF'></div>
+								</a>
+							</div>
+						</div>
+						
+						<!-- 下内容图列表 -->
+						<div class="page3Body">
+							<ul :class = '{page3Ul1:isPage3Li1,page3Ul2:isPage3Li2}' ref = 'page3Ul'>
+								<li v-for = 'page3li in page3' >
+									<div v-for = 'page3e in page3li' class="page3Img" :class = '{page3Img1:traY[2] == traY[7],page3Img0:traY[2] != traY[7]}'>
+										<!-- <div> -->	
+											<a href="#">
+												<img :src='page3e.url' :alt='page3e.alt'>
+											</a>
+											<div class="page3LiBg page3LiBg1"></div>
+											<div class="page3ImgBgBorder">
+												<span class="page3Span"></span>
+												<span class="page3Span"></span>
+												<span class="page3Span"></span>
+												<span class="page3Span"></span>
+											</div>
+										<!-- </div> -->
+									</div>
+								</li>
+							</ul>										
+						</div>
+					</div>
+				</div>		
+			<!-- page4 -->
+				<div class = 'page4'>
+					<div class="page4Box">
+						<!-- page4顶栏 -->
+						<div class="page4Head">
+							<div class="page4Img" :class = '{page4Tit1:traY[3] == traY[7],page4Tit0:traY[3] != traY[7]}'>
+								<img src="img/about_title.png">
+							</div>					
+							<div class="page4HeadTit" :class = '{page4HeadTit1:traY[3] == traY[7],page4HeadTit0:traY[3] != traY[7]}'  @mousemove = 'page4PageCtr'>
+								<div class="page4Headbtn" :class = '{page4HeadBtn1:ispage4Left,page4HeadBtn2:ispage4Right}' name = 'pg4Lbtn'>简介</div>
+								<div class="page4Headbtn" :class = '{page4HeadBtn1:ispage4Right,page4HeadBtn2:ispage4Left}' name = 'pg4Rbtn'>动态</div>
+							</div>
+						</div>
+						<!-- page4内容左页 -->
+						<div class="page4BodyL" :class = '{page4BodyL1:ispage4Left,page4BodyL0:ispage4Right}'>
+							<div class="pg4BodyImg" :class = '{pg4BodyImg1:traY[3] == traY[7],pg4BodyImg0:traY[3] != traY[7]}'>
+								<img src="img/about_img.png">
+							</div>			
+							<div class="page4BodyCon" :class = '{pg4BodyCon1:traY[3] == traY[7],pg4BodyCon0:traY[3] != traY[7]}'>
+								<div class="pg4BCTop">
+									<ul>
+										<li v-for = 'pg4BCTopli in page4.page4LTop'>
+											<div class="pg4BCTopBg">
+												<img :src = 'pg4BCTopli'>
+											</div>
+										</li>
+									</ul>
+								</div>
+								<div class="pg4BCbot">
+									{{page4.page4LBot}}
+								</div>
+							</div>
+						</div>
+						<!-- page4内容右页 -->
+						<div class="page4BodyR" :class = '{page4BodyR0:ispage4Left,page4BodyR1:ispage4Right}'>
+							<div>
+								<ul>
+									<li v-for = 'P4RCon in page4.page4RCon' class="P4RLi">
+										<div class="P4RTime">{{P4RCon.P4RTime}}</div>
+										<div class="P4RTitle">
+											<a href="#">{{P4RCon.P4RTitle}}</a>
+										</div>
+										<p class="P4RCon">{{P4RCon.P4RCon}}</p>
+										<div class="P4RIco">
+											<a href="#"></a>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			<!-- page5 -->
+				<div class = 'page5'>
+					<div class="page5Box">
+						<!-- 顶栏 -->
+						<div class="page5Top"></div>
+						<!-- 分割线 -->
+						<label class="page5Bd" :class = '{page5Bd0:traY[4] != traY[7],page5Bd1:traY[4] == traY[7]}'></label>
+						<!-- 内容栏 -->
+						<div class="page5Con" :class = '{page5Con0:traY[4] != traY[7],page5Con1:traY[4] == traY[7]}'>
+							<ul>
+								<li v-for = 'page5Img in page5' class="P5CLi">
+									<img :src="page5Img" class="page5Img">
+									<div class="P5CBg">
+										<span class="P5CSpan1 P5CSpan"></span>
+										<span class="P5CSpan2 P5CSpan"></span>
+										<span class="P5CSpan3 P5CSpan"></span>
+										<span class="P5CSpan4 P5CSpan"></span>
+									</div>					
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			<!-- page6 -->
+				<div class = 'page6'>
+					<div class="page6Box">
+						<div class="page6L" :class = '{page6L0:traY[5] != traY[7],page6L1:traY[5] == traY[7]}'>
+							<img src="img/contact_img.png">
+						</div>
+						<div class="page6R" :class = '{page6R0:traY[5] != traY[7],page6R1:traY[5] == traY[7]}'>
+							<div class="P6Top">
+								<img src="img/contact_title.png">
+							</div>
+							<div class="P6Bot">
+								<ul>
+									<li v-for = 'p6Li in page6' class="P6RLi">
+										<div :style = 'p6Li.p6Bg' class="P6RIco" :class = '{P6RIco1:p6Li.nLink}'></div>
+										<div class="P6RTit">{{p6Li.p6Tit}}</div>
+										<div class="P6RLink">
+											<a href="#">{{p6Li.p6Des}}</a>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			<!-- page7 -->
+				<div class = 'page7'  :class = '{page70:traY[6] != traY[7],page71:traY[6] == traY[7]}'>
+					<div class="page7Box">
+						<div class="Page7L">
+							Copyright © 2017 www.sc-xmc.com 技术支持
+							<br>
+							友情链接：
+							<a href="www.baidu.com">百度</a> 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var myXmc = new Vue({
+			el		:'#app',
+			data	:{
+						topLi:['联系我们','常见问题','源码解决方案','项目案例','新闻资讯','关于我们','网站首页'],
+						mainBg:['img/banner11.jpg','img/banner21.jpg','img/banner31.jpg'],
+						page1BgCtr:{ispage11:true,ispage12:false,ispage13:false},
+						traY:['-59','-984','-1909','-2834','-3759','-4684','-4788','-59'],
+						traYCtrKey:true,
+						traYStr:'transform: translateY(-59px)',
+						page2:
+							[{bg:'page2Bg1',ico:'page2Img1',cTitle:'高端网站设计制作',eTitle:'DESIGN CUSTOM',txt:'团队凭借多年的行业经验为企业量身定制，让您的企业在残酷的网络竞争中脱颖而出，立于不败之地。'},
+							{bg:'page2Bg2',ico:'page2Img2',cTitle:'网络运营与推广',eTitle:'NETWORK OPERATIONS',txt:'专注于高品质网络品牌运营推广服务，在网络中树立企业品牌形象，提高搜索关键词转换率，以及多终端广告展现！'},
+							{bg:'page2Bg3',ico:'page2Img3',cTitle:'HTML5响应式网站开发',eTitle:'RESPONSIVE WEBSITE',txt:'HTML5+CSS3设计制作的同时兼容手机和IPAD等触屏设备分辨率，达到更优访问效果，网站数据同步各终端。'},
+							{bg:'page2Bg4',ico:'page2Img4',cTitle:'移动端手机网站与APP',eTitle:'MOBILE WEBSITE',txt:'专注移动端手机网站设计、微网站、手机APP定制开发，创造有活力的品牌网站，在移动互联网市场中取得先机。'}],
+						page3: [[{url:'img/1-1F31G05F1913-lp.jpg',alt:'Jackery app'},
+							    {url:'img/1-1F31G05144R2-lp.jpg',alt:'为律生活打造在线法律服务平'},
+							    {url:'img/1-1F31G054123I-lp.jpg',alt:'优品汇手机助手'},
+							    {url:'img/1-1F31G054451A-lp.jpg',alt:'我开始健身pad端app'},
+							    {url:'img/1-1F31G05040124-lp.jpg',alt:'四维图新 - 趣逛地图'},
+							    {url:'img/1-1F31G05244325-lp.jpg',alt:'硅谷明星教育团队米豆教育'},
+							    {url:'img/1-1F31G05524557-lp.jpg',alt:'携手正量网开创工程建设电商'},
+							    {url:'img/1-1F3161T0133Y-lp.jpg',alt:'vivo Xplay5双曲面屏'}],
+							    [{url:'img/1-1F3161T2144V-lp.jpg',alt:'零担速配APP案例'}]],
+						isPage3Li1:true,
+						isPage3Li2:false,
+						ispage4Left:true,
+						ispage4Right:false,
+						page4:{
+							page4LTop:['img/about_ico1.png','img/about_ico2.png','img/about_ico3.png','img/about_ico4.png'],
+							page4LBot:'新茂昌网络科技有限公司自成立以来，一直专注于互联网品牌建设，我们团队的成员曾务于国内知名广告公司及互联网公司业务类型涉及WEB视觉、交互设计、移动终端用户体验等质量和信誉是我们存在的基石。我们注重客户提出的每个要求，充分考虑每一个细节，积极的做好服务，努力开拓更好的视野。我们永远不会因为我们曾经的成绩而满足。在所有新老客户面前，我们都很乐意虚心、朴实的跟您接触，更深入的了解您的企业，以便为您提供更优质的服务！ 我们的服务宗旨:持续为客户创造更优质的服务 感...',
+							page4RCon:
+							[{P4RTime:'2017-12-23',P4RTitle:'放任即是不信任，人一旦',P4RCon:'才建设是组织发展的重要环节，有人说现代企业间的竞争就是人才的竞争，可见人才培养的重要性。但现实中很多主管领导认为人才培养工作只是人力资源...'},
+							{P4RTime:'2017-08-11',P4RTitle:'从问题中做分析，产品才能准',P4RCon:'是到底要解决什么问题(没问题存在的需求都是伪需求)? 这个问题是不是特别严重?有没有详细的场景描述(XXX时，特别讨厌做XXX，要是XXX就好了)? 有多少用户...'},
+							{P4RTime:'2017-07-20',P4RTitle:'互联网时代下，做营销更多是',P4RCon:'一个有故事的人似乎会更有吸引力，起码别人都有点兴趣去了解他背后的故事是什么。同样，一个有故事的企业，也会被某种吸引力笼罩，做起生意来更加...'},
+							{P4RTime:'2017-05-16',P4RTitle:'没格局的努力都是在浪费时间',P4RCon:'我们都知道：有用的社交一定是势均力敌的，处于同等段位的人，才能平等地对话；小菜鸟跟大咖本来就不是一国的，很多时候你以为的热络也只不过是你...'}]
+						},
+						page5:['img/service_img1.png','img/service_img2.png','img/service_img3.png','img/service_img4.png','img/service_img5.png','img/service_img6.png','img/service_img7.png','img/service_img8.png','img/service_img9.png','img/service_img10.png','img/service_img11.png','img/service_img12.png','img/service_img13.png','img/service_img14.png','img/service_img15.png'],
+						page6:[{p6Bg:'background:url(img/cont_a.png)',p6Tit:'业务咨询:',p6Des:'1165974090 【点击咨询】',nLink:false},
+							   {p6Bg:'background:url(img/cont_a.png)',p6Tit:'技术服务:',p6Des:' 838363137 【点击咨询】',nLink:false},
+							   {p6Bg:'background:url(img/cont_c.png)',p6Tit:'公司邮箱：1165974090@qq.com',nLink:true},
+							   {p6Bg:'background:url(img/cont_d.png)',p6Tit:'四川省绵阳市涪城区长虹国际城26栋4单元8-13,8-14',nLink:true}]
+			},
+			methods:{
+				//page1背景切换动画
+				fMainBg:function(){
+					var obj = this.$data.page1BgCtr,
+						len = Object.keys(obj).length,
+						arr = [true],
+						j = 0,
+						// n为选中数组下标，选中为t，否则为f
+						n = 0;
+						console.log(this.$data.page1BgCtr);
+
+					 // 创建单选数组
+					for(var i=0;i<len-1;i++){
+						arr.push(false);
+					}
+
+					// page1BgCtr的值与arr的值对应
+					setInterval(function(){
+						//定时改变数组的选中值
+						if(n == len-1){
+							arr[n-2] = !arr[n-2];
+							arr[n] = !arr[n];
+							n = -1;
+						}else{
+							arr[n+1] = !arr[n+1];
+							arr[n] = !arr[n];
+						}
+						//对应到控制对象中	
+						for(var key in obj){
+							if(j == len){
+								j = 0;
+							}
+							obj[key] = arr[j];
+							j++;		
+						}
+						n++;					
+					},5000)	
+				},
+				//鼠标翻页控制
+				// traY为翻页控制Y坐标,traY[7]为当前页
+				pagCtr:function(event){
+					if(this.traYCtrKey){//翻页间隔			 
+						var	arrY = this.$data.traY,
+							event = event || window.event;
+						if(event.wheelDelta<0){//下翻页
+							for(var i = 0,j = arrY.length-1;i<j;i++){
+								if(arrY[7] == arrY[i]){
+									if(arrY[7]=='-59'){//第1页下翻时改变第2页box的宽度
+										this.$refs.page2Box.style.width = '1200px';
+
+									}//第2页下翻时改变第2页box的宽度
+									if(arrY[7]=='-984'){
+										this.$refs.page2Box.style.width = '100%';
+									}
+									arrY[7] = arrY[i+1];
+									this.traYCtr(arrY[7],this.traYCtrKey);
+									return
+								}
+							}
+						}else{//上翻页
+							for(var m = 0,n = arrY.length-2;m<n;n--){
+								if(arrY[7] == arrY[0]){
+									this.traYCtr(arrY[7],this.traYCtrKey);
+									return
+								}
+								if(arrY[7] == arrY[n]){
+									//第2页上翻时改变第2页box的宽度
+									if(arrY[7]=='-984'){
+										this.$refs.page2Box.style.width = '100%';
+									}//第3页上翻时改变第2页box的宽度
+									if(arrY[7]=='-1909'){
+										this.$refs.page2Box.style.width = '1200px';
+									}
+									arrY[7] = arrY[n-1];
+									this.traYCtr(arrY[7],this.traYCtrKey);
+									return
+								}
+							}
+						}
+					}
+
+				},
+				//鼠标翻页间隔控制
+				traYCtr:function(traYY){
+					this.traYStr = 'transform: translateY('+traYY+'px)';
+					this.traYCtrKey = false;
+					setTimeout(function(){
+						myXmc.$data.traYCtrKey = true;
+					},700);
+				},
+				//page2鼠标移入动画
+				page2BgShow:function(tgt){
+					var idx = tgt.substring(7)-1;
+					document.querySelectorAll('.page2Img')[idx].style['background-position'] = '0 100%';
+					document.querySelectorAll('.page2A')[idx].style.opacity = '1';
+					document.querySelector('.'+tgt).style.height = '100%';
+				},
+				//page2鼠标移出动画
+				page2BgHide:function(tgt){
+					var idx = tgt.substring(7)-1;
+					document.querySelectorAll('.page2Img')[idx].style['background-position'] = '0 0';
+					document.querySelectorAll('.page2A')[idx].style.opacity = '0';
+					document.querySelector('.'+tgt).style.height = '0%';
+				},
+				//page3内容翻页
+				page3BtnF:function(){
+					this.isPage3Li1 = !this.isPage3Li1;
+					this.isPage3Li2 = !this.isPage3Li2;
+				},
+				//page3图片背景显示及背景边框显示
+				//js控制span样式时会出现鼠标指向span触发以下方法
+				//直接用hover后面接选择器做
+				//
+				// page3LiBgF1:function(e){
+				// 	if (e.target.className == 'page3Span') {	
+				// 		var arrbd = e.path[1].children;
+				// 		e.path[2].className == 'page3LiBg page3LiBg2';
+				// 		console.log(e.path[2].className);
+				// 		arrbd[0].style.left = '0';
+				// 		arrbd[1].style.top = '0';
+				// 		arrbd[2].style.right = '0';
+				// 		arrbd[3].style.bottom = '0';
+				// 	}
+
+				// 	if (e.target.className == 'page3LiBg page3LiBg1') {
+				// 		e.target.className = 'page3LiBg page3LiBg2';
+				// 		var arrBd = e.path[1].lastChild.children;
+				// 		arrBd[0].style.left = '0';
+				// 		arrBd[1].style.top = '0';
+				// 		arrBd[2].style.right = '0';
+				// 		arrBd[3].style.bottom = '0';	
+				// 	}
+				// },
+				//page3图片背景隐藏及背景边框隐藏
+				// page3LiBgF2:function(e){
+				// 	console.log(e.target.className);
+				// 	if (e.target.className == 'page3Span') {
+				// 		e.path[2].className == 'page3LiBg page3LiBg2';
+				// 		return
+				// 		e.stopPropagation();
+				// 	}
+				// 	if (e.target.className == 'page3LiBg page3LiBg2') {
+				// 		e.target.className = 'page3LiBg page3LiBg1';
+				// 		var arrBd = e.path[1].lastChild.children;
+				// 		arrBd[0].style.left = '-235px';
+				// 		arrBd[1].style.top = '-150px';
+				// 		arrBd[2].style.right = '-235px';
+				// 		arrBd[3].style.bottom = '-150px';
+				// 	}
+				// },
+
+				// page4内容左右切换
+				page4PageCtr:function(e){
+					if(e.target.innerText == '简介'){
+						this.ispage4Left = true;
+						this.ispage4Right = false;
+						return
+					}
+					if(e.target.innerText == '动态'){
+						this.ispage4Left = false;
+						this.ispage4Right = true;
+						return
+					}
+				}
+			},
+			mounted(){
+				this.fMainBg();			
+				window.addEventListener('mousewheel',this.pagCtr);
+			}
+		})
+	</script>
+
+	</html>	
