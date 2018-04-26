@@ -2,6 +2,10 @@
 	margin: 0px;
 	padding: 0px;
 }
+html,body{
+	width: 100%;
+	height: 100%;
+}
 a{
 	cursor:pointer;
 	text-decoration: none;
@@ -18,6 +22,7 @@ li{
 	width: 100%;
 	height: 100%;
 }
+/*顶部导航栏*/
 #indexTop{
 	width: 100%;
 	height: 60px;
@@ -66,6 +71,36 @@ li{
 #topUl li a:hover{
 	color: #90C42F;
 }
+/* 左边导航栏*/
+.navi{
+	width: 20px;
+	height: 200px;
+	position: fixed;
+	top: 45%;
+	left: 30px;
+	z-index: 1;
+}
+.navi li{
+	float: none;
+	width: 20px;
+}
+.naviLi{
+	margin: 17px auto;
+	cursor: pointer;
+	transition: all 0.5s;
+}
+.naviLi0{
+	width: 8px;
+	height: 8px;
+	border-radius: 4px;
+	background: #cfcfd1;
+}
+.naviLi1{
+	width: 16px;
+	height: 16px;
+	border-radius: 8px;
+	background: #90C42F;
+}
 #indexMain{
 	position: fixed;
 	top: 119px;
@@ -73,6 +108,12 @@ li{
 	min-width: 1080px;
 	height: 925px;
 	transition: transform 0.5s linear 0s;
+}
+.isIndexPage0{
+	display: none;
+}
+.isIndexPage1{
+	display: block;
 }
 .page11{
 	background: url(../img/banner11.jpg);
@@ -93,6 +134,7 @@ li{
 	height: 104px;
 }
 .page1{
+	-webkit-transform: translate3d(0,0,0);
 	transition: background 1s linear 0s;
 }
 .page2{
@@ -120,6 +162,7 @@ li{
 	margin-left: -375px;
 }
 .bg13,.bg12,.bg12Img,.bg14,.bg22,.bg23,.bg32,.bg33{
+	-webkit-transform: translate3d(0,0,0);
 	position: absolute;
 	transition: all 1s ease 0s;
 	opacity: 0;
@@ -192,6 +235,12 @@ li{
 	text-align: center;
 	line-height: 24px;
 	transition:width 0.5s ease 0s;
+}
+.page2Width1{
+	width: 1200px;
+}
+.page2Width0{
+	width: 100%;
 }
 .page2Box ul{
 	margin: 0 auto;

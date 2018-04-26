@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
+	<title>case</title>
+	<link rel="stylesheet" href="css/case.css">
+	<script type="text/javascript" src="js/vue.js"></script>
+	<script type="text/javascript" src="js/vue-router.js"></script>
+	<script type="text/javascript" src="js/axios.min.js"></script>	
+</head>
+<body>
+
+<!-- 组件尝试 -->
+	<!-- <template>
+		<div>
+			<alert></alert>
+		</div>
+	</template>
+	<script>
+		import alert  from 'components/alert.vue';
+		export default {
+			components:{
+				'alert':alert
+			},
+			methods:{
+			}
+		}
+	</script> -->
+	<div id = 'indexTop'>
+		<div id = 'indexTop1'>
+			<div id = 'logo'><img src="img/logo.png"></div>
+			<ul id = 'topUl' @click='fnPage'>
+				<li><a href="#" id = 'isContantPage'>联系我们</a></li>
+				<li><a href="#" id = 'isWentiPage'>常见问题</a></li>
+				<li><a href="#" id = 'isCodePage'>源码解决方案</a></li>
+				<li><a href="case.html" id = 'isCasePage'>项目案例</a></li>
+				<li><a href="#" id = 'isNewsPage'>新闻资讯</a></li>
+				<li><a href="#" id = 'isAboutPage'>关于我们</a></li>
+				<li><a href="index.html" id = 'isIndexPage'>网站首页</a></li>
+			</ul>
+		</div>	
+	</div>
+
+<!-- 内容 -->
+	<div id='casePage' ref='casePage' class ='casePage'>
+		<div class="casePageImg">				
+		</div>
+		<div class="casePageTable" @click='fncpTitle'>
+			<ul>
+				<li class="cpTitle" id = 'cpTotle'>
+					<a href="#">全部</a>
+				</li>
+				<li class="cpTitle" id = 'cpApp'>
+					<a href="#">App</a>
+				</li>
+				<li class="cpTitle" id = 'cpWeb'>
+					<a href="#">网站开发</a>
+				</li>
+				<li class="cpTitle" id = "cpWX">
+					<a href="#">微信开发</a>
+				</li>
+			</ul>
+		</div>
+		<div class="casePageCon">
+			<ul>
+				<li v-for = 'cConLi in casesCon' :class="{isShow1:cConLi.cType==casesShow,isShow0:cConLi.cType!=casesShow,isAllShow:casesAllShow}" class="cpcLi">
+					<div>
+						<img :src='cConLi.cCon' alt="">
+						<p>{{cConLi.cTit}}</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	var myCase = new Vue({
+		el:'#casePage',
+		data:{
+			// 展示数据
+			casesCon:[],
+			// 镜像数据
+			casesCon0:[],
+			// 分页展示数据
+			casesConArr:[],
+			// 展示数据类型
+			casesShow:'app',
+			// 全是显示
+			casesAllShow:true	
+		},
+		methods:{
+			//数据分类展示
+			fncpTitle:function(e){
+				if (e.target.nodeName == 'LI') {
+					document.documentElement.scrollTop = 0;
+					switch(e.target.id){
+						case 'cpTotle':
+							this.$data.casesAllShow = true;
+							break
+						case 'cpApp':
+							this.$data.casesShow = 'app';
+							this.$data.casesAllShow = false;
+							break
+						case 'cpWeb':
+							this.$data.casesShow = 'web';
+							this.$data.casesAllShow = false;
+							break
+						case 'cpWX':
+							this.$data.casesShow = 'wx';
+							this.$data.casesAllShow = false;
+							break
+					}
+				}
+			},
+			//casesCon数组分页，每页arrlen个
+			conPageArr:function(arrlen){
+				this.$data.casesCon0 = [].concat(this.$data.casesCon);
+				var casesLen = this.$data.casesCon.length,
+					arr = [];
+				for (var i = 0,j = 0;i<casesLen;i++) {
+					if(j<arrlen-1){
+						arr.push(this.$data.casesCon[i]);
+						j++;
+					}else{
+						arr.push(this.$data.casesCon[i]);
+						this.$data.casesConArr.push(arr);
+						j = 0;
+						arr = [];
+					}
+					if (i == casesLen-1 && arr != '') {
+						this.$data.casesConArr.push(arr);
+					}					
+				}
+				//this.$data.casesCon = [];
+				//this.$data.casesCon = this.$data.casesCon.concat(this.$data.casesConArr.shift());
+				//console.log(this.$data.casesCon);
+			},
+		},
+		mounted(){
+			this.conPageArr(6);
+			axios.get('server/mxmc.php')
+			.then(function(re){
+				var cDataArr = [],
+					arr 	 = [],
+					pageUrl	 = location.href.split('case.html')[0],
+				    cDataStr ='[' + re.data.substring(0,re.data.length-1) + ']';
+				cDataArr = JSON.parse(cDataStr);
+				for(var i = 0,j = cDataArr.length;i<j;i++){
+					var obj = {};
+						obj.cTit = cDataArr[i][1];
+						obj.cCon = pageUrl+cDataArr[i][2];
+						obj.cType= cDataArr[i][3];
+					myCase.$data.casesCon.push(obj);
+				}
+			})
+			.catch(function(re){
+				console.log(re);
+			});
+		}
+	})
+</script>
+</html>

@@ -1,0 +1,16 @@
+当前
+
+1,本示例参考网站http://www.sc-xmc.com/index.html,目前仅做出index，cases页面作为展示
+2,页面展示vue，动画css3，数据库mysql，服务端php,ajax为axios,不完全的路由自行JS实现
+3,先将mxmc.sql导入数据库,然后在服务器上运行页面
+4,向所有前端大佬致敬！
+
+
+未来目标
+
+SPA单页面,
+vue组件化,
+移动终端自适应，
+webPack打包,
+vue-router路由,
+python或nodeJs服务端

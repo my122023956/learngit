@@ -2,11 +2,10 @@
 	<html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 		<title>index</title>
 		<link rel="stylesheet" href="css/index.css">
-		<!-- <link rel="stylesheet/less" type="text/css" href="styles.less" />
-		<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.2/less.min.js" ></script> -->
+		<link rel="stylesheet/less" type="text/css" href="styles.less" />
+		<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.2/less.min.js" ></script>	 -->
 		<script type="text/javascript" src="js/vue.js"></script>
 		<script type="text/javascript" src="js/vue-router.js"></script>
 	</head>
@@ -16,10 +15,24 @@
 			<div id = 'indexTop'>
 				<div id = 'indexTop1'>
 					<div id = 'logo'><img src="img/logo.png"></div>
-					<ul id = 'topUl'>
-						<li v-for = 'topli in topLi'><a href="#">{{topli}}</a></li>
+					<ul id = 'topUl' @click='fnPage'>
+						<li><a href="#" id = 'isContantPage'>联系我们</a></li>
+						<li><a href="#" id = 'isWentiPage'>常见问题</a></li>
+						<li><a href="#" id = 'isCodePage'>源码解决方案</a></li>
+						<li><a href="case.html" id = 'isCasePage'>项目案例</a></li>
+						<li><a href="#" id = 'isNewsPage'>新闻资讯</a></li>
+						<li><a href="#" id = 'isAboutPage'>关于我们</a></li>
+						<li><a href="index.html" id = 'isIndexPage'>网站首页</a></li>
 					</ul>
 				</div>	
+			</div>
+			<!-- 左边导航栏 -->
+			<div class="navi">
+				<ul>
+					<li v-for = '(nav,index) in navi'>
+						<div :id = 'nav' class="naviLi" :class = '{naviLi1:nowPage == navi[index],naviLi0:nowPage != navi[index]}' @click = 'fnNavi'></div>
+					</li>
+				</ul>
 			</div>
 			<!-- 内容栏 -->
 			<div id="indexMain" ref = 'indexMain' :style="traYStr">
@@ -49,7 +62,7 @@
 				</div>
 			<!-- page2 -->
 				<div class = 'page2' ref = 'page2'>
-					<div class="page2Box" ref = 'page2Box'>
+					<div class="page2Box" ref = 'page2Box' :class = '{page2Width0:traY[1] != nowTraY,page2Width1:traY[1] == nowTraY}'>
 						<ul>
 							<li v-for = 'page2li in page2'  v-on:mouseover='page2BgShow(page2li.bg)' v-on:mouseout='page2BgHide(page2li.bg)' ref = 'page2li'>
 								<div :class="page2li.bg" class="page2Bg"></div>
@@ -71,11 +84,11 @@
 					<div class="page3Box" ref='page3Box'>
 						<!-- 上标题图栏 -->
 						<div class="page3Head">
-							<div class="page3Tit" :class = '{page3Tit1:traY[2] == traY[7],page3Tit0:traY[2] != traY[7]}'>
+							<div class="page3Tit" :class = '{page3Tit1:traY[2] == nowTraY,page3Tit0:traY[2] != nowTraY}'>
 								<img src="img/case_title.png">
 							</div>
 							<!-- 上右控制按钮 -->
-							<div class="page3Btn" :class = '{page3Btn1:traY[2] == traY[7],page3Btn0:traY[2] != traY[7]}'>
+							<div class="page3Btn" :class = '{page3Btn1:traY[2] == nowTraY,page3Btn0:traY[2] != nowTraY}'>
 								<a href="#">
 									<div :class = '{page3BtnD11:isPage3Li1,page3BtnD12:isPage3Li2}' v-on:click = 'page3BtnF'></div>
 								</a>
@@ -89,7 +102,7 @@
 						<div class="page3Body">
 							<ul :class = '{page3Ul1:isPage3Li1,page3Ul2:isPage3Li2}' ref = 'page3Ul'>
 								<li v-for = 'page3li in page3' >
-									<div v-for = 'page3e in page3li' class="page3Img" :class = '{page3Img1:traY[2] == traY[7],page3Img0:traY[2] != traY[7]}'>
+									<div v-for = 'page3e in page3li' class="page3Img" :class = '{page3Img1:traY[2] == nowTraY,page3Img0:traY[2] != nowTraY}'>
 										<!-- <div> -->	
 											<a href="#">
 												<img :src='page3e.url' :alt='page3e.alt'>
@@ -113,20 +126,20 @@
 					<div class="page4Box">
 						<!-- page4顶栏 -->
 						<div class="page4Head">
-							<div class="page4Img" :class = '{page4Tit1:traY[3] == traY[7],page4Tit0:traY[3] != traY[7]}'>
+							<div class="page4Img" :class = '{page4Tit1:traY[3] == nowTraY,page4Tit0:traY[3] != nowTraY}'>
 								<img src="img/about_title.png">
 							</div>					
-							<div class="page4HeadTit" :class = '{page4HeadTit1:traY[3] == traY[7],page4HeadTit0:traY[3] != traY[7]}'  @mousemove = 'page4PageCtr'>
+							<div class="page4HeadTit" :class = '{page4HeadTit1:traY[3] == nowTraY,page4HeadTit0:traY[3] != nowTraY}'  @mousemove = 'page4PageCtr'>
 								<div class="page4Headbtn" :class = '{page4HeadBtn1:ispage4Left,page4HeadBtn2:ispage4Right}' name = 'pg4Lbtn'>简介</div>
 								<div class="page4Headbtn" :class = '{page4HeadBtn1:ispage4Right,page4HeadBtn2:ispage4Left}' name = 'pg4Rbtn'>动态</div>
 							</div>
 						</div>
 						<!-- page4内容左页 -->
 						<div class="page4BodyL" :class = '{page4BodyL1:ispage4Left,page4BodyL0:ispage4Right}'>
-							<div class="pg4BodyImg" :class = '{pg4BodyImg1:traY[3] == traY[7],pg4BodyImg0:traY[3] != traY[7]}'>
+							<div class="pg4BodyImg" :class = '{pg4BodyImg1:traY[3] == nowTraY,pg4BodyImg0:traY[3] != nowTraY}'>
 								<img src="img/about_img.png">
 							</div>			
-							<div class="page4BodyCon" :class = '{pg4BodyCon1:traY[3] == traY[7],pg4BodyCon0:traY[3] != traY[7]}'>
+							<div class="page4BodyCon" :class = '{pg4BodyCon1:traY[3] == nowTraY,pg4BodyCon0:traY[3] != nowTraY}'>
 								<div class="pg4BCTop">
 									<ul>
 										<li v-for = 'pg4BCTopli in page4.page4LTop'>
@@ -166,9 +179,9 @@
 						<!-- 顶栏 -->
 						<div class="page5Top"></div>
 						<!-- 分割线 -->
-						<label class="page5Bd" :class = '{page5Bd0:traY[4] != traY[7],page5Bd1:traY[4] == traY[7]}'></label>
+						<label class="page5Bd" :class = '{page5Bd0:traY[4] != nowTraY,page5Bd1:traY[4] == nowTraY}'></label>
 						<!-- 内容栏 -->
-						<div class="page5Con" :class = '{page5Con0:traY[4] != traY[7],page5Con1:traY[4] == traY[7]}'>
+						<div class="page5Con" :class = '{page5Con0:traY[4] != nowTraY,page5Con1:traY[4] == nowTraY}'>
 							<ul>
 								<li v-for = 'page5Img in page5' class="P5CLi">
 									<img :src="page5Img" class="page5Img">
@@ -186,10 +199,10 @@
 			<!-- page6 -->
 				<div class = 'page6'>
 					<div class="page6Box">
-						<div class="page6L" :class = '{page6L0:traY[5] != traY[7],page6L1:traY[5] == traY[7]}'>
+						<div class="page6L" :class = '{page6L0:traY[5] != nowTraY,page6L1:traY[5] == nowTraY}'>
 							<img src="img/contact_img.png">
 						</div>
-						<div class="page6R" :class = '{page6R0:traY[5] != traY[7],page6R1:traY[5] == traY[7]}'>
+						<div class="page6R" :class = '{page6R0:traY[5] != nowTraY,page6R1:traY[5] == nowTraY}'>
 							<div class="P6Top">
 								<img src="img/contact_title.png">
 							</div>
@@ -208,13 +221,13 @@
 					</div>
 				</div>
 			<!-- page7 -->
-				<div class = 'page7'  :class = '{page70:traY[6] != traY[7],page71:traY[6] == traY[7]}'>
+				<div class = 'page7'  :class = '{page70:traY[6] != nowTraY,page71:traY[6] == nowTraY}'>
 					<div class="page7Box">
 						<div class="Page7L">
 							Copyright © 2017 www.sc-xmc.com 技术支持
 							<br>
 							友情链接：
-							<a href="www.baidu.com">百度</a> 
+							<a href="http://www.sc-xmc.com/index.html">新茂昌</a> 
 						</div>
 					</div>
 				</div>
@@ -224,11 +237,14 @@
 	<script type="text/javascript">
 		var myXmc = new Vue({
 			el		:'#app',
-			data	:{
-						topLi:['联系我们','常见问题','源码解决方案','项目案例','新闻资讯','关于我们','网站首页'],
+			data	:{					
 						mainBg:['img/banner11.jpg','img/banner21.jpg','img/banner31.jpg'],
 						page1BgCtr:{ispage11:true,ispage12:false,ispage13:false},
-						traY:['-59','-984','-1909','-2834','-3759','-4684','-4788','-59'],
+						page1BgAn:true,
+						traY:['-59','-984','-1909','-2834','-3759','-4684','-4788'],
+						nowTraY:'-59',
+						navi:['banner','service','cases','about','client','contact','footer'],
+						nowPage:'banner',
 						traYCtrKey:true,
 						traYStr:'transform: translateY(-59px)',
 						page2:
@@ -262,27 +278,97 @@
 						page6:[{p6Bg:'background:url(img/cont_a.png)',p6Tit:'业务咨询:',p6Des:'1165974090 【点击咨询】',nLink:false},
 							   {p6Bg:'background:url(img/cont_a.png)',p6Tit:'技术服务:',p6Des:' 838363137 【点击咨询】',nLink:false},
 							   {p6Bg:'background:url(img/cont_c.png)',p6Tit:'公司邮箱：1165974090@qq.com',nLink:true},
-							   {p6Bg:'background:url(img/cont_d.png)',p6Tit:'四川省绵阳市涪城区长虹国际城26栋4单元8-13,8-14',nLink:true}]
+							   {p6Bg:'background:url(img/cont_d.png)',p6Tit:'四川省绵阳市涪城区长虹国际城26栋4单元8-13,8-14',nLink:true}]				
 			},
+			// created:function(){
+			// 	var  pageH = document.documentElement.clientHeight;
+			// 	for(var i = 0,j=-59,k;i<6;i++){
+			// 		k = -pageH*i+j;
+			// 		this.$data.traY.push(k);
+			// 	}
+			// 	this.$data.traY
+			// 	console.log(this.$data.traY);
+			// },
 			methods:{
+				//路由控制
+				fnNavi:function(e,lctHref){
+					//局部变量减少查询
+					var url,
+						naviID,
+						navArr = this.$data.navi;					
+					if(e.target){//e.target存在为导航栏点击事件
+						naviID = e.target.id;
+						url = location.href.split('#');				
+						location.href = url[0] +'#'+naviID;//改变地址栏
+						this.$data.nowPage = naviID;//改变nowPage的值,window监听自动跳转
+						return
+					}else{//不存在为地址栏直接输入						
+						url = lctHref.split('#');
+						if(url.length > 2){
+							return
+						}
+						this.fnPageCtr(url[1])
+					}												
+				},
+				//页面跳转控制 
+				fnPageCtr:function(nowPage){
+					console.log(nowPage);			
+					var navArr = this.$data.navi;//获取路由地址数组
+					if (nowPage == navArr[0]) {//page1背景动画开关
+						this.$data.page1BgAn == true;	
+					}else{
+						this.$data.page1BgAn == false;	
+					}
+					for(var i = 0,j = navArr.length;i<j;i++){//检查当前路由地址是否在路由数组中
+						if(nowPage == navArr[i]){//如果存在则获取对应Y坐标数组的值跳转并终止函数继续执行
+							this.$data.nowTraY = this.$data.traY[i];
+							location.href = location.href.split('#')[0] + '#' + nowPage;
+							this.$data.traYStr = 'transform: translateY('+ this.$data.nowTraY +'px)';
+							return
+						}
+					}
+					//nowPage不在路由地址数组中，跳转到第一页
+					if(location.href.split('#').length == 1){
+						return
+					}
+					this.$data.nowTraY = this.$data.traY[0];
+					this.$data.traYStr = 'transform: translateY(-59px)';
+					alert('地址错误');
+				},
 				//page1背景切换动画
-				fMainBg:function(){
+				fMainBg:function(){					
 					var obj = this.$data.page1BgCtr,
 						len = Object.keys(obj).length,
-						arr = [true],
+						arr = [true,false,false],
 						j = 0,
-						// n为选中数组下标，选中为t，否则为f
 						n = 0;
-						console.log(this.$data.page1BgCtr);
-
 					 // 创建单选数组
-					for(var i=0;i<len-1;i++){
-						arr.push(false);
-					}
-
+					// for(var i=0;i<len-1;i++){
+					// 	arr.push(false);
+					// }
 					// page1BgCtr的值与arr的值对应
-					setInterval(function(){
+					if(n == len-1){
+						arr[n-2] = !arr[n-2];
+						arr[n] = !arr[n];
+						n = -1;
+					}else{
+						arr[n+1] = !arr[n+1];
+						arr[n] = !arr[n];
+					}
+					//对应到控制对象中	
+					for(var key in obj){
+						if(j == len){
+							j = 0;
+						}
+						obj[key] = arr[j];
+						j++;		
+					}
+					n++;
+					page1Itv = setInterval(function(){
 						//定时改变数组的选中值
+						if (!myXmc.$data.page1BgAn) {
+							clearInterval(page1Itv);
+						}
 						if(n == len-1){
 							arr[n-2] = !arr[n-2];
 							arr[n] = !arr[n];
@@ -300,45 +386,37 @@
 							j++;		
 						}
 						n++;					
-					},5000)	
+					},5000)					
 				},
 				//鼠标翻页控制
-				// traY为翻页控制Y坐标,traY[7]为当前页
+				// traY为翻页控制Y坐标,nowTraY为当前页
 				pagCtr:function(event){
-					if(this.traYCtrKey){//翻页间隔			 
-						var	arrY = this.$data.traY,
-							event = event || window.event;
+					var nowPage = this.$data.nowPage,
+						naviArr = this.$data.navi,
+						event = event || window.event;
+					if(this.traYCtrKey){//翻页间隔时间控制
 						if(event.wheelDelta<0){//下翻页
-							for(var i = 0,j = arrY.length-1;i<j;i++){
-								if(arrY[7] == arrY[i]){
-									if(arrY[7]=='-59'){//第1页下翻时改变第2页box的宽度
-										this.$refs.page2Box.style.width = '1200px';
-
-									}//第2页下翻时改变第2页box的宽度
-									if(arrY[7]=='-984'){
-										this.$refs.page2Box.style.width = '100%';
-									}
-									arrY[7] = arrY[i+1];
-									this.traYCtr(arrY[7],this.traYCtrKey);
+							for(var i = 0,j = naviArr.length;i<j;i++){
+								if (nowPage == '') {
+									this.$data.nowPage = 'service';
+								}
+								if(nowPage == naviArr[6]){//最后一页不可下翻页
+									return
+								}
+								if(nowPage == naviArr[i]){//查找nowPage在路由数组的位置并赋值为下一页
+									this.$data.nowPage = naviArr[i+1];
+									this.traYCtr();//翻页后有间隔时间，不能继续立刻翻页
 									return
 								}
 							}
 						}else{//上翻页
-							for(var m = 0,n = arrY.length-2;m<n;n--){
-								if(arrY[7] == arrY[0]){
-									this.traYCtr(arrY[7],this.traYCtrKey);
+							for(var i = 0,j = naviArr.length;i<j;i++){
+								if(nowPage == naviArr[0]){//第一页不可上翻页
 									return
 								}
-								if(arrY[7] == arrY[n]){
-									//第2页上翻时改变第2页box的宽度
-									if(arrY[7]=='-984'){
-										this.$refs.page2Box.style.width = '100%';
-									}//第3页上翻时改变第2页box的宽度
-									if(arrY[7]=='-1909'){
-										this.$refs.page2Box.style.width = '1200px';
-									}
-									arrY[7] = arrY[n-1];
-									this.traYCtr(arrY[7],this.traYCtrKey);
+								if(nowPage == naviArr[i]){//查找nowPage在路由数组的位置并赋值为下一页
+									this.$data.nowPage = naviArr[i-1];
+									this.traYCtr();//翻页后有间隔时间，不能继续立刻翻页
 									return
 								}
 							}
@@ -347,8 +425,7 @@
 
 				},
 				//鼠标翻页间隔控制
-				traYCtr:function(traYY){
-					this.traYStr = 'transform: translateY('+traYY+'px)';
+				traYCtr:function(){
 					this.traYCtrKey = false;
 					setTimeout(function(){
 						myXmc.$data.traYCtrKey = true;
@@ -368,53 +445,11 @@
 					document.querySelectorAll('.page2A')[idx].style.opacity = '0';
 					document.querySelector('.'+tgt).style.height = '0%';
 				},
-				//page3内容翻页
+				//page3内容左右翻页
 				page3BtnF:function(){
 					this.isPage3Li1 = !this.isPage3Li1;
 					this.isPage3Li2 = !this.isPage3Li2;
 				},
-				//page3图片背景显示及背景边框显示
-				//js控制span样式时会出现鼠标指向span触发以下方法
-				//直接用hover后面接选择器做
-				//
-				// page3LiBgF1:function(e){
-				// 	if (e.target.className == 'page3Span') {	
-				// 		var arrbd = e.path[1].children;
-				// 		e.path[2].className == 'page3LiBg page3LiBg2';
-				// 		console.log(e.path[2].className);
-				// 		arrbd[0].style.left = '0';
-				// 		arrbd[1].style.top = '0';
-				// 		arrbd[2].style.right = '0';
-				// 		arrbd[3].style.bottom = '0';
-				// 	}
-
-				// 	if (e.target.className == 'page3LiBg page3LiBg1') {
-				// 		e.target.className = 'page3LiBg page3LiBg2';
-				// 		var arrBd = e.path[1].lastChild.children;
-				// 		arrBd[0].style.left = '0';
-				// 		arrBd[1].style.top = '0';
-				// 		arrBd[2].style.right = '0';
-				// 		arrBd[3].style.bottom = '0';	
-				// 	}
-				// },
-				//page3图片背景隐藏及背景边框隐藏
-				// page3LiBgF2:function(e){
-				// 	console.log(e.target.className);
-				// 	if (e.target.className == 'page3Span') {
-				// 		e.path[2].className == 'page3LiBg page3LiBg2';
-				// 		return
-				// 		e.stopPropagation();
-				// 	}
-				// 	if (e.target.className == 'page3LiBg page3LiBg2') {
-				// 		e.target.className = 'page3LiBg page3LiBg1';
-				// 		var arrBd = e.path[1].lastChild.children;
-				// 		arrBd[0].style.left = '-235px';
-				// 		arrBd[1].style.top = '-150px';
-				// 		arrBd[2].style.right = '-235px';
-				// 		arrBd[3].style.bottom = '-150px';
-				// 	}
-				// },
-
 				// page4内容左右切换
 				page4PageCtr:function(e){
 					if(e.target.innerText == '简介'){
@@ -427,13 +462,25 @@
 						this.ispage4Right = true;
 						return
 					}
+				},
+				fnPage:function(e){
+					if(e.target.nodeName == 'A'){
+						eval('this.$data.'+ e.target.id +'= true');
+					}else{
+						return
+					}
 				}
 			},
 			mounted(){
 				this.fMainBg();			
 				window.addEventListener('mousewheel',this.pagCtr);
-			}
+				window.addEventListener('hashchange',this.fnNavi(false,location.href));
+			},
 		})
+		myXmc.$watch('nowPage',function(){//监听nowPage自动换页
+			myXmc.fnPageCtr(myXmc.$data.nowPage);
+		})
+		myXmc.fnPageCtr(location.href.split('#')[1])
+		//myXmc.$data.nowPage = 'service';
 	</script>
-
 	</html>	

@@ -1,0 +1,159 @@
+/*::-webkit-scrollbar {
+	display:none;
+}*/
+html,body{
+	width: 100%;
+	height: 100%;
+}
+*{
+	margin: 0px;
+	padding: 0px;
+}
+a{
+	cursor:pointer;
+	text-decoration: none;
+	color: #666;
+	transition: color 0.5s;
+}
+.clear{
+	clear: both;
+}
+li{
+	list-style: none;
+	float: left;
+}
+#indexTop{
+	width: 100%;
+	height: 60px;
+	font-size: 20px;
+	line-height: 60px;
+	background: #fffefe;
+	position: fixed;
+	top: 0;
+	z-index: 15;
+}
+#indexTop1{
+	width: 1100px;
+	height: 60px;
+	margin: 0 auto;
+}
+#logo{
+	height: 50px;
+	width: 230px;
+	margin-top: 10px;
+	float: left;
+}
+#topUl{
+	width: 860px;
+	height: 100%;
+	line-height: 60px;
+	text-align: right;
+	float: left;
+}
+#topUl li{
+	height: 60px;
+	line-height: 60px;
+	padding: 0 16px 0 23px;
+	float:right;
+	background: url(../img/ico2.png) no-repeat left center;
+}
+#topUl li:last-child{
+	background: transparent;
+}
+#topUl li a{
+	display:block;
+	font-size: 16px;
+	line-height: 60px;
+	color: #666;
+	transition: color 0.3s linear 0s;
+}
+#topUl li a:hover{
+	color: #90C42F;
+}
+.casePage{
+	top: 60px;
+	width: 100%;
+	min-width: 1080px;
+	height: 925px;
+	position: absolute;
+}
+.isCasePage0{
+	display: none;
+}
+.isCasePage1{
+	display: block;
+}
+.casePageImg{
+	width: 100%;
+	height: 300px;
+	background: url(../img/bn6.jpg) no-repeat center top;;	
+}
+.casePageTable{
+	width: 100%;
+	height: 65px;
+	border-bottom: 1px solid #dadada;
+}
+
+.casePageTable a{
+		pointer-events: none;
+}
+.casePageTable ul{
+	width: 340px;
+	text-align: center;
+	height: 62px;
+	margin: 0 auto;
+}
+.casePageTable ul li{
+	width: 85px;
+	height: 62px;
+	line-height: 62px;
+}
+.casePageTable ul li:hover{
+	border-bottom: 3px solid #90C42F;
+}
+.casePageTable ul li:hover a{
+	color: #90C42F;
+}
+
+.casePageCon{
+	width: 100%;
+}
+.casePageCon ul{
+	width: 1200px;
+	position: absolute;
+	left: 50%;
+	margin: 24px -594px;
+}
+.cpcLi{
+	width: 366px;
+    height: 275px;
+    background: #f3f0ed;
+    line-height: 25px;
+    margin: 15px;
+    float: left;
+    color: #666;
+    transition: all 0.5s;
+}
+.cpcLi:hover img{
+	box-shadow: 0 0 10px #888888;
+}
+.cpcLi:hover p{	
+	color: #90C42F; 
+}
+.cpcLi img{
+	width: 100%;
+	height: 220px;
+}
+.cpcLi p{
+	font-size: 18px;
+	margin: 6px 20px;
+}
+.isShow1{
+	display: block;
+}
+.isShow0{
+	display: none;
+}
+.isAllShow{
+	display: block;
+}
