@@ -312,7 +312,10 @@
 				},
 				//页面跳转控制 
 				fnPageCtr:function(nowPage){
-					console.log(nowPage);			
+					console.log(nowPage);
+					if(!nowPage){//地址栏后单独跟#号的情况nowPage为‘’
+						return
+					}			
 					var navArr = this.$data.navi;//获取路由地址数组
 					if (nowPage == navArr[0]) {//page1背景动画开关
 						this.$data.page1BgAn == true;	

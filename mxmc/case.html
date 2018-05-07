@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />      -->
+	<!-- <meta name="apple-mobile-web-app-capable" content="yes" />     -->
+	<!-- <meta name="format-detection" content="telephone=no" /> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<title>case</title>
 	<link rel="stylesheet" href="css/case.css">
 	<script type="text/javascript" src="js/vue.js"></script>
@@ -87,7 +90,9 @@
 			// 展示数据类型
 			casesShow:'app',
 			// 全是显示
-			casesAllShow:true	
+			casesAllShow:true,
+			//添加占位元素数量
+			isAddcpcLi:0	
 		},
 		methods:{
 			//数据分类展示
@@ -136,13 +141,18 @@
 				//this.$data.casesCon = this.$data.casesCon.concat(this.$data.casesConArr.shift());
 				//console.log(this.$data.casesCon);
 			},
+			cpcLiYC:function(){
+				console.log(document.querySelectorAll('.cpcLi'));
+			}
 		},
 		mounted(){
 			this.conPageArr(6);
-			axios.get('server/mxmc.php')
+			// ajax获取数据
+			axios.get('server/mxmc.php?type=getCases')
 			.then(function(re){
 				var cDataArr = [],
 					arr 	 = [],
+					scWidth  = document.body.offsetWidth,
 					pageUrl	 = location.href.split('case.html')[0],
 				    cDataStr ='[' + re.data.substring(0,re.data.length-1) + ']';
 				cDataArr = JSON.parse(cDataStr);
@@ -157,7 +167,7 @@
 			.catch(function(re){
 				console.log(re);
 			});
-		}
-	})
+		},
+	})	
 </script>
 </html>

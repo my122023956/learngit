@@ -1,4 +1,5 @@
 <?php
+	// echo $_GET['type'];
 	$mysqli = new mysqli("localhost","root","root","mydb");
 	$query = 'select * from t_mxmc';
 	$mysqli->query('SET NAMES UTF8');//解决中文乱码问题
